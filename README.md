@@ -1,9 +1,8 @@
 # yt_downloader
 This will download YT(YouTube) videos or even playlist in best resolution.
 
-clone this repo 
+download the both code and install the requirements
 
-run project 
+# Run project 
 
-pip install -r requirements.txt
 streamlit run index.py
