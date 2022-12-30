@@ -1,4 +1,4 @@
-pytube
-sys
-threading
-streamlit
+pytube==12.1.2
+os-sys==2.1.4
+threaded==4.1.0
+streamlit==1.16.0
