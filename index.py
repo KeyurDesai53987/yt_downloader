@@ -15,7 +15,7 @@ st.write("Used: %d GiB" % (used // (2**30)))
 st.write("Free: %d GiB" % (free // (2**30)))
 
 st.write("Files: ")
-st.write(os.listdir('/home'))
+st.write(os.listdir('/'))
 # ------ CODE ------
 
 if st.button("Download"):
