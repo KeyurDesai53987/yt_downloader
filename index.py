@@ -16,9 +16,9 @@ st.write("Free: %d GiB" % (free // (2**30)))
 # ------ CODE ------
 
 if st.button("Download"):
-    
+    '''
     if 'DESKTOP_SESSION' not in os.environ: #and os.environ('HOSTNAME')=='streamlit':
-        '''
+        
         with open(title, 'rb') as f:
             bytes = f.read()
             b64 = base64.b64encode(bytes).decode()
@@ -27,20 +27,20 @@ if st.button("Download"):
             </a>'
             st.markdown(href, unsafe_allow_html=True)
 
-        os.remove(title)'''
+        os.remove(title)
         st.error('Can not download online')
+    else:'''
+    val = d.check_link(url)
+    #down_path = d.file_path()
+
+    if val == 'plist':
+        res = d.playlist_down(url)
+    elif val == 'single':
+        res = d.downloading(url)
     else:
-        val = d.check_link(url)
-        #down_path = d.file_path()
+        res = 'no'
 
-        if val == 'plist':
-            res = d.playlist_down(url)
-        elif val == 'single':
-            res = d.downloading(url)
-        else:
-            res = 'no'
-
-        if res == 'no':
-            st.error(res)
-        else:
-            st.success(res)
+    if res == 'no':
+        st.error(res)
+    else:
+        st.success(res)
