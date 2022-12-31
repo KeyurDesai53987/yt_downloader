@@ -3,3 +3,4 @@ os-sys==2.1.4
 texteditor==1.4.1
 threaded==4.1.0
 streamlit==1.16.0
+python-editor==1.0.4
