@@ -2,12 +2,14 @@ import streamlit as st
 #from main import start
 import code as d
 import os
+import shutil
 
 # streamlit assets 
 
 url = st.text_input("YT Url: ")
 down_path = d.file_path()
-st.write('Download path: ', down_path)
+stat = shutil.disk_usage(down_path)
+st.write('Download path: {}\nSize: {}'.format(down_path, stat))
 # ------ CODE ------
 
 if st.button("Download"):
