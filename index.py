@@ -8,11 +8,11 @@ import shutil
 
 url = st.text_input("YT Url: ")
 down_path = d.file_path()
-total, used, free = shutil.disk_usage(down_path)
+#total, used, free = shutil.disk_usage(down_path)
 st.write('Download path: {}'.format(down_path))
-st.write("Total: %d GiB" % (total // (2**30)))
-st.write("Used: %d GiB" % (used // (2**30)))
-st.write("Free: %d GiB" % (free // (2**30)))
+#st.write("Total: %d GiB" % (total // (2**30)))
+#st.write("Used: %d GiB" % (used // (2**30)))
+#st.write("Free: %d GiB" % (free // (2**30)))
 
 st.write("Files: ")
 st.write(os.listdir(down_path))
