@@ -28,33 +28,34 @@ def down_url(url):
     else:
         st.success(res)
 
-# streamlit assets 
-number = None
-option = None
-url = None
-url = st.text_input("YT Url: ")
-down_path = d.file_path()
-try:
-    total, used, free = shutil.disk_usage(down_path)
-    files = os.listdir(down_path)
-    st.write('Download path: {}'.format(down_path))
-    st.write("Total: %d GiB" % (total // (2**30)))
-    st.write("Used: %d GiB" % (used // (2**30)))
-    st.write("Free: %d GiB" % (free // (2**30)))
-    st.write("Files: ")
-    #st.write(files)
-    print(files)
-except:
-    st.write('Can\'t find download path')
-    st.write('Download Something')
+def start():
+    # streamlit assets 
+    number = None
+    option = None
+    url = None
+    url = st.text_input("YT Url: ")
+    down_path = d.file_path()
+    try:
+        total, used, free = shutil.disk_usage(down_path)
+        files = os.listdir(down_path)
+        st.write('Download path: {}'.format(down_path))
+        st.write("Total: %d GiB" % (total // (2**30)))
+        st.write("Used: %d GiB" % (used // (2**30)))
+        st.write("Free: %d GiB" % (free // (2**30)))
+        st.write("Files: ")
+        #st.write(files)
+        print(files)
+    except:
+        st.write('Can\'t find download path')
+        st.write('Download Something')
 
-try:
-    option = st.selectbox(
-        'What would you like to download?',
-        files)
-    st.write('You selected:', option)
-except:
-    st.write("Files not present in directory")
+    try:
+        option = st.selectbox(
+            'What would you like to download?',
+            files)
+        st.write('You selected:', option)
+    except:
+        st.write("Files not present in directory")
 
 # ------ CODE ------
 
@@ -70,6 +71,9 @@ if st.button("Download"):
         st.write(p)
         st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
         st.write('{} is downloaded'.format(option))
+     
+if st.button("Refresh"):
+    again = start()
         
 def dummy():
     if val == 'Invalid Link!!!':
@@ -77,3 +81,6 @@ def dummy():
         st.write(p)
         st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
         st.write('{} is downloaded'.format(files[number]))
+
+        
+begin = start()        
