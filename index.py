@@ -1,40 +1,65 @@
 import streamlit as st
 #from main import start
 import code as d
-import os
 import shutil
+import os
+import base64
+
+
+def get_binary_file_downloader_html(bin_file, file_label='File'):
+    with open(bin_file, 'wb') as f:
+        data = f.read()
+    bin_str = base64.b64encode(data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
+    return href
+
 
 # streamlit assets 
-
+number = None
+option = None
 url = st.text_input("YT Url: ")
 down_path = d.file_path()
-#total, used, free = shutil.disk_usage(down_path)
+total, used, free = shutil.disk_usage(down_path)
+files = os.listdir(down_path)
 st.write('Download path: {}'.format(down_path))
-#st.write("Total: %d GiB" % (total // (2**30)))
-#st.write("Used: %d GiB" % (used // (2**30)))
-#st.write("Free: %d GiB" % (free // (2**30)))
+st.write("Total: %d GiB" % (total // (2**30)))
+st.write("Used: %d GiB" % (used // (2**30)))
+st.write("Free: %d GiB" % (free // (2**30)))
 
 st.write("Files: ")
-#st.write(os.listdir(down_path))
+#st.write(files)
+print(files)
+
+try:
+    option = st.selectbox(
+        'What would you like to download?',
+        files)
+
+    st.write('You selected:', option)
+except:
+    st.write("Files not present in directory")
+
 # ------ CODE ------
 
 if st.button("Download"):
-    '''
-    if 'DESKTOP_SESSION' not in os.environ: #and os.environ('HOSTNAME')=='streamlit':
-        
-        with open(title, 'rb') as f:
-            bytes = f.read()
-            b64 = base64.b64encode(bytes).decode()
-            href = f'<a href="data:file/zip;base64,{b64}" download=\'{title}\'>\
-                Here is your link \
-            </a>'
-            st.markdown(href, unsafe_allow_html=True)
+    if option==None:
+        st.error('select something')
+    else:
+        p = down_path + '{}'.format('\\') + option
+        st.write(p)
+        st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
+        st.write('{} is downloaded'.format(option))
 
-        os.remove(title)
-        st.error('Can not download online')
-    else:'''
+        
+def dummy():
     val = d.check_link(url)
     #down_path = d.file_path()
+
+    if val == 'Invalid Link!!!':
+        p = down_path + '{}'.format('\\') + files[number]
+        st.write(p)
+        st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
+        st.write('{} is downloaded'.format(files[number]))
 
     if val == 'plist':
         res = d.playlist_down(url)
