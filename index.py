@@ -21,23 +21,22 @@ url = st.text_input("YT Url: ")
 down_path = d.file_path()
 try:
     total, used, free = shutil.disk_usage(down_path)
+    files = os.listdir(down_path)
+    st.write('Download path: {}'.format(down_path))
+    st.write("Total: %d GiB" % (total // (2**30)))
+    st.write("Used: %d GiB" % (used // (2**30)))
+    st.write("Free: %d GiB" % (free // (2**30)))
+    st.write("Files: ")
+    #st.write(files)
+    print(files)
 except:
     st.write('Can\'t find download path')
-files = os.listdir(down_path)
-st.write('Download path: {}'.format(down_path))
-st.write("Total: %d GiB" % (total // (2**30)))
-st.write("Used: %d GiB" % (used // (2**30)))
-st.write("Free: %d GiB" % (free // (2**30)))
-
-st.write("Files: ")
-#st.write(files)
-print(files)
+    st.write('Download Something')
 
 try:
     option = st.selectbox(
         'What would you like to download?',
         files)
-
     st.write('You selected:', option)
 except:
     st.write("Files not present in directory")
