@@ -19,7 +19,10 @@ number = None
 option = None
 url = st.text_input("YT Url: ")
 down_path = d.file_path()
-total, used, free = shutil.disk_usage('\\')
+try:
+    total, used, free = shutil.disk_usage(down_path)
+except:
+    st.write('Can\'t find download path')
 files = os.listdir(down_path)
 st.write('Download path: {}'.format(down_path))
 st.write("Total: %d GiB" % (total // (2**30)))
