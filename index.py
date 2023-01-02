@@ -1,5 +1,5 @@
 import streamlit as st
-import pyautogui
+#import pyautogui
 #from main import start
 import code as d
 import shutil
@@ -75,8 +75,8 @@ if st.button("Download"):
         st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
         st.write('{} is downloaded'.format(option))
           
-if st.button("Refresh"):
-    pyautogui.hotkey("ctrl","F5")            
+#if st.button("Refresh"):
+    #pyautogui.hotkey("ctrl","F5")            
             
 def dummy():
     if st.button("Refresh"):
