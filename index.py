@@ -59,6 +59,8 @@ def start():
 
 # ------ CODE ------
 
+begin = start()        
+
 if st.button("Download"):
     if option==None:
         st.error('select something')
@@ -81,6 +83,3 @@ def dummy():
         st.write(p)
         st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
         st.write('{} is downloaded'.format(files[number]))
-
-        
-begin = start()        
