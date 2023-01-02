@@ -1,3 +1,4 @@
 pytube==12.1.2
+PyAutoGUI==0.9.53
 threaded==4.1.0
 streamlit==1.16.0
