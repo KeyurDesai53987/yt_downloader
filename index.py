@@ -13,6 +13,20 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
     href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
     return href
 
+def down_url(url):
+    val = d.check_link(url)
+    #down_path = d.file_path()
+    if val == 'plist':
+        res = d.playlist_down(url)
+    elif val == 'single':
+        res = d.downloading(url)
+    else:
+        res = 'no'
+
+    if res == 'no':
+        st.error(res)
+    else:
+        st.success(res)
 
 # streamlit assets 
 number = None
@@ -56,22 +70,6 @@ if st.button("Download"):
         st.write(p)
         st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
         st.write('{} is downloaded'.format(option))
-
-        
-def down_url(url):
-    val = d.check_link(url)
-    #down_path = d.file_path()
-    if val == 'plist':
-        res = d.playlist_down(url)
-    elif val == 'single':
-        res = d.downloading(url)
-    else:
-        res = 'no'
-
-    if res == 'no':
-        st.error(res)
-    else:
-        st.success(res)
         
 def dummy():
     if val == 'Invalid Link!!!':
