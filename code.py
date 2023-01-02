@@ -58,7 +58,6 @@ def downloader(num, link):
     for i in link[num]:
         filename=downloading(i)
         print("threading {}:  ".format(num) + filename.split('/')[-1] + ' Downloaded Successfully')
-    again = start()
 
 def file_path():
     home = os.path.expanduser('~')
@@ -80,7 +79,6 @@ def check_link(yt_link):
         except:
             val = 'Invalid Link!!!'
             print(val)
-            start()
     return val
 
 def start():
