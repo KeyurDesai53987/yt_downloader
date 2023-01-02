@@ -17,6 +17,7 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
 # streamlit assets 
 number = None
 option = None
+url = None
 url = st.text_input("YT Url: ")
 down_path = d.file_path()
 try:
@@ -46,6 +47,10 @@ except:
 if st.button("Download"):
     if option==None:
         st.error('select something')
+        if url!=None:
+            down_url(url)
+        else:
+            st.write('Enter valid url')
     else:
         p = down_path + '{}'.format('\\') + option
         st.write(p)
@@ -53,16 +58,9 @@ if st.button("Download"):
         st.write('{} is downloaded'.format(option))
 
         
-def dummy():
+def down_url(url):
     val = d.check_link(url)
     #down_path = d.file_path()
-
-    if val == 'Invalid Link!!!':
-        p = down_path + '{}'.format('\\') + files[number]
-        st.write(p)
-        st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
-        st.write('{} is downloaded'.format(files[number]))
-
     if val == 'plist':
         res = d.playlist_down(url)
     elif val == 'single':
@@ -74,3 +72,10 @@ def dummy():
         st.error(res)
     else:
         st.success(res)
+        
+def dummy():
+    if val == 'Invalid Link!!!':
+        p = down_path + '{}'.format('\\') + files[number]
+        st.write(p)
+        st.markdown(get_binary_file_downloader_html(p, 'Video'), unsafe_allow_html=True)
+        st.write('{} is downloaded'.format(files[number]))
